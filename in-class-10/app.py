@@ -2,7 +2,7 @@
 # app.py: the routes for the books app.
 # SKELETON: the whole path works (form → /results → results page) with fake data.
 # Next: replace one piece at a time, and commit each time something works.
-from flask import Flask, render_template, request   # request (Flask), not requests!
+from flask import Flask, render_template, request
 from api import get_books
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ def results():
     # 1. Read the search term from the form
     author = request.args.get("author_search", "")
 
-    # 2. Empty input? → home page + message (check BEFORE calling the API)
+    # 2. Empty input? → home page + message
     if not author.strip():
         return render_template("home.html", message="Please enter an author's name.")
 
@@ -26,6 +26,8 @@ def results():
     books = get_books(author)
 
     # 4. API error? (get_books returned None) → home page + message
+    if books is None:
+        return render_template("home.html", message="Something went wrong while searching. Please try again.")
 
     # 5. No results, or nothing useful to show? → home page + message
 
