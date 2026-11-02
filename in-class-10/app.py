@@ -29,7 +29,9 @@ def results():
     if books is None:
         return render_template("home.html", message="Something went wrong while searching. Please try again.")
 
-    # 5. No results, or nothing useful to show? → home page + message
+    # 5. No results? → home page + message
+    if not books:
+        return render_template("home.html", message="No books found. Try searching for a different author.")
 
     # 6. Otherwise → results page
     return render_template("results.html", books=books, author=author)
