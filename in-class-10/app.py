@@ -33,5 +33,10 @@ def results():
     if not books:
         return render_template("home.html", message="No books found. Try searching for a different author.")
 
-    # 6. Otherwise → results page
+    # 6. Missing fields? → home page + message
+    for book in books:
+        if not book.get("title") or not book.get("first_publish_year"):
+            return render_template("home.html", message="Some book information is missing. Try another search.")
+
+    # Otherwise → results page
     return render_template("results.html", books=books, author=author)
