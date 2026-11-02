@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Art Explorer</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    <p>Showing results for: {{ search_term }}</p>
+
+    {% if error_message %}
+        <p role="alert">{{ error_message }}</p>
+
+    {% elif not search_term.strip() %}
+        <p>Please enter a search term.</p>
+
+    {% elif artworks %}
+        {% for artwork in artworks %}
+            <article>
+                <h2>{{ artwork.title or "Unknown title" }}</h2>
+                <p>Artist: {{ artwork.artist_title or "Unknown artist" }}</p>
+                <p>Date: {{ artwork.date_display or "Unknown date" }}</p>
+                <p>Medium: {{ artwork.medium_display or "Unknown medium" }}</p>
+            </article>
+        {% endfor %}
+
+    {% else %}
+        <p>No artworks found. Try another search.</p>
+    {% endif %}
+
+    <a href="/">Back to search</a>
+</body>
+</html>
