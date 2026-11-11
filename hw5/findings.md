@@ -28,9 +28,9 @@ Answers to my two questions, in my own words:
 2. The route decorator allows both methods. POST is what our form currently uses, but GET would also allow someone to visit a results URL with a search term in the URL. Supporting both gives some flexibility.
 
 ## 5. My fix
-What was wrong:
-What I changed:
-How I checked it works:
+What was wrong: The app displayed unrelated artwork because it didn't filter API results by relevance.
+What I changed: Added _score to the API fields and filtered out artworks with scores at or below 0.001.
+How I checked it works: I ran all four pytests and they passed. I also searched Monet and a nonsense artist name in the browser - Monet returned relevant artwork info and nonsense search returned no results. 
 Commit before: (hash)  Commit after: (hash)
 
 ## 6. Can we ship it? (100–150 words)
